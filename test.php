@@ -12,7 +12,8 @@ include 'Parse/GeoPoint.php';
 include 'Parse/ACL.php';
 include 'Parse/Cloud.php';
 
-Parse\Rest\Client::initialize('', '', '', 'https://api.parse.com/1/');
+// set your app id and keys here
+Parse\Rest\Client::initialize('appid', 'masterkey', 'restkey', 'https://api.parse.com/1/');
 
 $parseObj = new Parse\Object('Categoria');
 

@@ -124,12 +124,11 @@ class Client
         }
 
         //BELOW HELPS WITH DEBUGGING
-        /*
-        if(!in_array($responseCode,$expectedCode)){
-            //print_r($response);
-            //print_r($args);
-        }
-        */
+        // if (!in_array($responseCode,$expectedCode)) {
+        //     print_r($response);
+        //     print_r($args);
+        // }
+
         return $this->checkResponse($response, $responseCode, $expectedCode);
     }
 
@@ -203,7 +202,8 @@ class Client
             $this->throwError($error->error, $error->code);
         } else {
             //check for empty return
-            if ($response == '{}') {
+            // response equals empty string when DELETE a file (example)
+            if ($response == '{}' || $response == '') {
                 return true;
             } else {
                 return json_decode($response);

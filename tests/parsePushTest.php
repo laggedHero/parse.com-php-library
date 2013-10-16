@@ -5,14 +5,14 @@ class parsePushTest extends \Enhance\TestFixture {
 	}
 
 	public function sendWithGlobalMessageExpectTrue(){
-		$parsePush = \Enhance\Core::getCodeCoverageWrapper('parsePush', array( 'Global message to be sent out right away' ));
+		$parsePush = \Enhance\Core::getCodeCoverageWrapper('Parse\Push', array( 'Global message to be sent out right away' ));
 		$return = $parsePush->send();
-				
+
 		\Enhance\Assert::isTrue( $return );
 	}
 
 	public function sendWithDataExpectTrue(){
-		$parsePush = \Enhance\Core::getCodeCoverageWrapper('parsePush');
+		$parsePush = \Enhance\Core::getCodeCoverageWrapper('Parse\Push');
 
 		//$parsePush->channel = 'TEST_CHANNEL_ONE'; //this or channels required
 		$parsePush->channels = array('TEST_CHANNEL_ONE','TEST_CHANNEL_TWO'); //this or just channel required
@@ -24,7 +24,7 @@ class parsePushTest extends \Enhance\TestFixture {
 		$parsePush->type = 'ios';
 		$parsePush->badge = 538; //ios only
 		$parsePush->sound = 'cheer'; //ios only
-		$parsePush->content_available = 1; //ios only - for newsstand applications. Also, changed from content-available to content_available. 
+		$parsePush->content_available = 1; //ios only - for newsstand applications. Also, changed from content-available to content_available.
 		//$parsePush->title = 'test notification title'; //android only - gives title to the notification
 
 		//CUSTOM DATA CAN BE SENT VERY EASILY ALONG WITH YOUR NOTIFICATION MESSAGE AND CAN BE ACCESSED PROGRAMATICALLY VIA THE MOBILE DEVICE... JUST DON'T SET NAMES THE SAME AS RESERVERD ONES MENTIONED ABOVE
@@ -36,5 +36,3 @@ class parsePushTest extends \Enhance\TestFixture {
 	}
 
 }
-
-?>

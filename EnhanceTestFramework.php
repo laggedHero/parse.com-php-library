@@ -411,7 +411,7 @@ class TextSp
     public $CannotCallVerifyOnStub = 'No se puede llamar  VerifyExpectations en un stub';
     public $ReturnsOrThrowsNotBoth = 'Debe proporcionar un solo valor de retorno (1 returns() ó 1 throws())';
     public $ScenarioWithExpectMismatch = 'Escenario debe ser inicializado con el mismo número de llamadas "with" y "expect" ';
-	public $LineFile = 'Linha {0} no arquivo {1}';    
+	public $LineFile = 'Linha {0} no arquivo {1}';
 	public $TypeOfVar=" Tipo: ";
 }
 
@@ -1468,11 +1468,11 @@ class HtmlTemplate implements iOutputTemplate
                         margin: 0;
                         padding-bottom: 5em;
                     }
-                
+
                     .error {
                         color: red;
                     }
-                    
+
                     .ok {
                         color: green;
                     }
@@ -1482,11 +1482,11 @@ class HtmlTemplate implements iOutputTemplate
                 <header>
                     <h1>' . $this->Text->EnhanceTestFramework . '</h1>
                 </header>
-                
+
                 <article id="maincontent">
                     {0}
                 </article>
-        
+
                 <footer>
                     <p><a href="http://www.enhance-php.com/">' . $this->Text->EnhanceTestFrameworkFull . '</a> ' .
             $this->Text->Copyright . ' &copy;2011 - ' . date('Y') .
@@ -1740,4 +1740,3 @@ class Localisation
 {
     public $Language = Language::English;
 }
-?>

@@ -1,6 +1,20 @@
 <?php
 include_once 'EnhanceTestFramework.php';
-include_once 'parse.php';
+
+include 'Parse/Library/Exception.php';
+include 'Parse/Rest/Client.php';
+include 'Parse/Object.php';
+include 'Parse/Query.php';
+include 'Parse/User.php';
+include 'Parse/File.php';
+include 'Parse/Push.php';
+include 'Parse/GeoPoint.php';
+include 'Parse/ACL.php';
+include 'Parse/Cloud.php';
+
+Parse\Rest\Client::initialize('', '', '', 'https://api.parse.com/1/');
+
+$parseObj = new Parse\Object('Categoria');
 
 //UNCOMMENT AN INDIVIDUAL FILE TESTS OR JUST THE DISCOVERTESTS LINE FOR ALL TESTS
 //include_once 'tests/parseObjectTest.php';
@@ -9,9 +23,6 @@ include_once 'parse.php';
 //include_once 'tests/parseFileTest.php';
 //include_once 'tests/parsePushTest.php';
 //include_once 'tests/parseGeoPointTest.php';
-\Enhance\Core::discoverTests('tests/');
+//\Enhance\Core::discoverTests('tests/');
 
-\Enhance\Core::runTests();
-
-
-?>
+//\Enhance\Core::runTests();

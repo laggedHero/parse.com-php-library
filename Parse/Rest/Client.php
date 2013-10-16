@@ -6,10 +6,10 @@ use Parse\Library\Exception as ParseLibraryException;
 
 class Client
 {
-    private $_appid = '';
-    private $_masterkey = '';
-    private $_restkey = '';
-    private $_parseurl = '';
+    private static $_appid = '';
+    private static $_masterkey = '';
+    private static $_restkey = '';
+    private static $_parseurl = '';
 
     public $data;
     public $requestUrl = '';
@@ -17,14 +17,8 @@ class Client
 
     public function __construct()
     {
-        $parseConfig = new parseConfig;
-        $this->_appid = $parseConfig::APPID;
-        $this->_masterkey = $parseConfig::MASTERKEY;
-        $this->_restkey = $parseConfig::RESTKEY;
-        $this->_parseurl = $parseConfig::PARSEURL;
-
-        if (empty($this->_appid) || empty($this->_restkey) || empty($this->_masterkey)) {
-            $this->throwError('You must set your Application ID, Master Key and REST API Key');
+        if (empty(self::$_appid) || empty(self::$_restkey) || empty(self::$_masterkey)) {
+            $this->throwError('You must initialize the Parse Rest Client');
         }
 
         $version = curl_version();
@@ -33,7 +27,18 @@ class Client
         if (!$ssl_supported) {
             $this->throwError('CURL ssl support not found');
         }
+    }
 
+    public static function initialize($appid, $masterkey, $restkey, $parseurl)
+    {
+        self::$_appid = $appid;
+        self::$_masterkey = $masterkey;
+        self::$_restkey = $restkey;
+        self::$_parseurl = $parseurl;
+
+        if (empty(self::$_appid) || empty(self::$_restkey) || empty(self::$_masterkey)) {
+            throw new ParseLibraryException('You must set your Application ID, Master Key and REST API Key');
+        }
     }
 
     /*
@@ -55,8 +60,8 @@ class Client
                 CURLOPT_HTTPHEADER,
                 array(
                     'Content-Type: ' . $args['contentType'],
-                    'X-Parse-Application-Id: ' . $this->_appid,
-                    'X-Parse-Master-Key: ' . $this->_masterkey
+                    'X-Parse-Application-Id: ' . self::$_appid,
+                    'X-Parse-Master-Key: ' . self::$_masterkey
                 )
             );
             $isFile = true;
@@ -66,8 +71,8 @@ class Client
                 CURLOPT_HTTPHEADER,
                 array(
                     'Content-Type: application/json',
-                    'X-Parse-Application-Id: ' . $this->_appid,
-                    'X-Parse-REST-API-Key: ' . $this->_restkey,
+                    'X-Parse-Application-Id: ' . self::$_appid,
+                    'X-Parse-REST-API-Key: ' . self::$_restkey,
                     'X-Parse-Session-Token: ' . $args['sessionToken']
                 )
             );
@@ -77,14 +82,14 @@ class Client
                 CURLOPT_HTTPHEADER,
                 array(
                     'Content-Type: application/json',
-                    'X-Parse-Application-Id: ' . $this->_appid,
-                    'X-Parse-REST-API-Key: ' . $this->_restkey,
-                    'X-Parse-Master-Key: ' . $this->_masterkey
+                    'X-Parse-Application-Id: ' . self::$_appid,
+                    'X-Parse-REST-API-Key: ' . self::$_restkey,
+                    'X-Parse-Master-Key: ' . self::$_masterkey
                 )
             );
         }
         curl_setopt($c, CURLOPT_CUSTOMREQUEST, $args['method']);
-        $url = $this->_parseurl . $args['requestUrl'];
+        $url = self::$_parseurl . $args['requestUrl'];
 
         if ($args['method'] == 'PUT' || $args['method'] == 'POST') {
             if ($isFile) {

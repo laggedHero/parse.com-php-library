@@ -7,7 +7,7 @@ The original is here: https://github.com/apotropaic/parse.com-php-library
 
 ### Feedback Wanted ###
 
-I may had broken something. Dunno. Also, apotropaic wants some feedback to. Look at the original project.
+I may had broken something. Dunno. Also, apotropaic wants some feedback too. Look at the original project.
 
 
 SETUP
@@ -49,5 +49,5 @@ Must say: didn't run this code. :/
     //create acl
     $parse->ACL = array("*" => array("write" => true, "read" => true));
     $r = $parse->save();
-    ?>
+
 ```

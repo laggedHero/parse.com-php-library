@@ -285,7 +285,7 @@ class Query extends Client
             );
 
             if (!empty($options)) {
-                $this->_query[$key]['options'] = $options;
+                $this->_query[$key]['$options'] = $options;
             }
         } else {
             $this->throwError('the $key and $value parameters must be set when setting a "where" query method');

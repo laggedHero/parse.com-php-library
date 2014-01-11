@@ -296,7 +296,19 @@ class Query extends Client
     public function wherePointer($key, $className, $objectId)
     {
         if (isset($key) && isset($className)) {
-            $this->_query[$key] = $this->dataType('pointer', array($className,$objectId));
+            $this->_query[$key] = $this->dataType('pointer', array($className, $objectId));
+        } else {
+            $this->throwError('the $key and $className parameters must be set when setting a "where" pointer query method');
+        }
+
+    }
+
+    public function whereRelatedTo($key, $className, $objectId)
+    {
+        if (isset($key) && isset($className)) {
+            $this->_query = array(
+                '$relatedTo' => array('object' => $this->dataType('pointer', array($className, $objectId)), 'key' => $key)
+            );
         } else {
             $this->throwError('the $key and $className parameters must be set when setting a "where" pointer query method');
         }
